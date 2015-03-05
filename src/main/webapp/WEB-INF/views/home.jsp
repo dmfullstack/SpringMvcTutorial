@@ -4,12 +4,12 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Insert title here</title>
+    <title>Spring MVC Tutorial</title>
 </head>
 <body>
 
-<a href="users">users</a><br/>
-<a href="usersList">json users list</a>
+<a href="users">User Table</a><br/>
+<a href="usersList">User in Json Array</a>
 
 </body>
 </html>

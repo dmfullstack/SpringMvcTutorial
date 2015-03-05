@@ -189,7 +189,7 @@
     </dependencies>
 
     <build>
-        <finalName>SpringMcvTutorial</finalName>
+        <finalName>SpringMvcTutorial</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

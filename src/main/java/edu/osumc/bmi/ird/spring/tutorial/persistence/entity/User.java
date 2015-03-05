@@ -23,6 +23,7 @@ import java.util.Set;
 @Table(name = "users")
 public class User implements Serializable {
 
+    static final long serialVersionUID = 1L;
     @Id
     @GenericGenerator(name = "generator", strategy = "increment")
     @GeneratedValue(generator = "generator")

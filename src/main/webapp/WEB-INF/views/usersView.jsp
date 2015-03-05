@@ -6,6 +6,7 @@
 <head>
     <link rel='stylesheet' href='<c:url
     value="/assets/vendor/bootstrap-3.3.2/css/bootstrap.min.css" />'>
+    <title>User Table</title>
 </head>
 <body>
 

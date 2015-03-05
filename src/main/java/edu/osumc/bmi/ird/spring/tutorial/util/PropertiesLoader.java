@@ -14,15 +14,15 @@ public class PropertiesLoader {
 
     public Properties load(String fileName) {
         Properties prop = new Properties();
-        InputStream im = null;
+        InputStream inputStream = null;
         try {
-            im = findFile(fileName);
-            prop.load(im);
+            inputStream = findFile(fileName);
+            prop.load(inputStream);
         } catch (IOException ignore) {
         } finally {
-            if (im != null) {
+            if (inputStream != null) {
                 try {
-                    im.close();
+                    inputStream.close();
                 } catch (IOException ignore) {
                 }
             }
@@ -80,5 +80,4 @@ public class PropertiesLoader {
             return null;
         }
     }
-
 }

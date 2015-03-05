@@ -5,6 +5,7 @@ import edu.osumc.bmi.ird.spring.tutorial.persistence.entity.User;
 import edu.osumc.bmi.ird.spring.tutorial.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
  * User Service Impl.
  * Created by swang on 3/4/2015.
  */
+@Transactional
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
