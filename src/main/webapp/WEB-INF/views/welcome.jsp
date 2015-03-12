@@ -7,7 +7,8 @@
 </head>
 <body>
 
-<h2>Welcome <%=UserResource.getCurrentUser().getUsername()%>
+<c:set var="username" value="<%=UserResource.getCurrentUser().getUsername()%>" scope="session"/>
+<h2>Welcome ${username}
 </h2>
 
 <h2>Authorities <%=UserResource.getCurrentUser().getAuthorities()%>

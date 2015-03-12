@@ -32,15 +32,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/login", "/login/form**", "/register", "/logout").permitAll()
-                .antMatchers("/admin", "/admin/**").hasRole("ADMIN")
+                .antMatchers("/login", "/login/form**", "/register", "/logout").permitAll() // #1
+                .antMatchers("/admin", "/admin/**").hasRole("ADMIN") // #2
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login/form")
                 .loginProcessingUrl("/login")
                 .failureUrl("/login/form?error")
-                .permitAll();
+                .permitAll() // #3
+                .and()
+                .exceptionHandling().accessDeniedPage("/403") // #4 denied, mapped in Controller
+        ;
     }
 
     @Override

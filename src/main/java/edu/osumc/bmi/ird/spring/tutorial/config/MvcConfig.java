@@ -5,14 +5,18 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import java.util.Locale;
 import java.util.Properties;
 
 /**
@@ -41,6 +45,34 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         configurer.enable();
     }
 
+    /**
+     * Register locale change interceptor bean.
+     * The request can add a language parameter to set the locale.
+     * eg. page?language=zh_CN, en, fr, etc
+     *
+     * @return
+     */
+    @Bean
+    public LocaleChangeInterceptor localeChangeInterceptor() {
+        LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
+        interceptor.setParamName("language");
+        return interceptor;
+    }
+
+    /**
+     * Register locale resolver bean. Name must be localeResolver.
+     * Without this bean spring will use default locale resolver which set the locale
+     * based on the request accept-language settings.
+     *
+     * @return
+     */
+    @Bean(name = "localeResolver")
+    public LocaleResolver sessionLocaleResolver() {
+        SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();
+        sessionLocaleResolver.setDefaultLocale(new Locale("en")); // zh_CN for Chinese
+        return sessionLocaleResolver;
+    }
+
     @Bean(name = "jspViewResolver")
     public InternalResourceViewResolver jspViewResolver() {
         InternalResourceViewResolver bean = new InternalResourceViewResolver();
@@ -58,6 +90,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     public ReloadableResourceBundleMessageSource getMessageSource() {
         ReloadableResourceBundleMessageSource resource = new
                 ReloadableResourceBundleMessageSource();
+        // load messages.properties from classpath, it can also be in other locations
         resource.setBasename("classpath:messages");
         resource.setDefaultEncoding("UTF-8");
         return resource;
