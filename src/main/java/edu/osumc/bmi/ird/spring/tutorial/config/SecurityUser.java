@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.Set;
 
 /**
+ * Implements spring security UserDetails to support authentication.
  * Created by swang on 3/11/2015.
  */
 public class SecurityUser extends User implements UserDetails {
