@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<%@page import="edu.osumc.bmi.ird.spring.tutorial.web.controller.UserResource" %>
+<%@page import="edu.osumc.bmi.ird.spring.tutorial.controller.UserResource" %>
 <%@include file="taglib.jsp" %>
 <html>
 <head>

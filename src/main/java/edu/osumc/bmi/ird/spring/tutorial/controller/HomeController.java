@@ -1,4 +1,4 @@
-package edu.osumc.bmi.ird.spring.tutorial.web.controller;
+package edu.osumc.bmi.ird.spring.tutorial.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

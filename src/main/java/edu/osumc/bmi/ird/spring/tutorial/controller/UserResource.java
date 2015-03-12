@@ -1,4 +1,4 @@
-package edu.osumc.bmi.ird.spring.tutorial.web.controller;
+package edu.osumc.bmi.ird.spring.tutorial.controller;
 
 import edu.osumc.bmi.ird.spring.tutorial.config.SecurityUser;
 import edu.osumc.bmi.ird.spring.tutorial.persistence.entity.User;

@@ -20,7 +20,7 @@ import java.util.Properties;
  */
 @EnableWebMvc
 @Configuration
-@ComponentScan(basePackages = {"edu.osumc.bmi.ird.spring.tutorial.web.controller"})
+@ComponentScan(basePackages = {"edu.osumc.bmi.ird.spring.tutorial.controller"})
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
     @Override
