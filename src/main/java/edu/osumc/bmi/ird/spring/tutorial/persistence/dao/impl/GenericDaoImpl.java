@@ -23,7 +23,7 @@ public abstract class GenericDaoImpl<T, PK extends Serializable> implements Gene
     private static final Logger LOG = LoggerFactory.getLogger(GenericDaoImpl.class);
 
     @PersistenceContext
-    private EntityManager entityManager;
+    protected EntityManager entityManager;
     private Class<T> type;
 
     @SuppressWarnings("unchecked")

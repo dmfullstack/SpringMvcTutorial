@@ -16,6 +16,7 @@
         <hibernate.validator.version>4.2.0.Final</hibernate.validator.version>
         <hibernate.entitymanager.version>4.2.6.Final</hibernate.entitymanager.version>
         <org.springframework-version>4.1.5.RELEASE</org.springframework-version>
+        <org.springframework.security-version>3.2.6.RELEASE</org.springframework.security-version>
         <spring-data-jpa.version>1.6.0.RELEASE</spring-data-jpa.version>
         <org.slf4j-version>1.6.6</org.slf4j-version>
         <xml.jackson.version>2.5.1</xml.jackson.version>
@@ -50,6 +51,27 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${org.springframework-version}</version>
+        </dependency>
+        <!-- spring security -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${org.springframework.security-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${org.springframework.security-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${org.springframework.security-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>${org.springframework.security-version}</version>
         </dependency>
 
         <!-- spring jpa2 implementation -->

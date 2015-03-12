@@ -2,57 +2,51 @@ package edu.osumc.bmi.ird.spring.tutorial.config;
 
 import edu.osumc.bmi.ird.spring.tutorial.util.PropertiesLoader;
 import edu.osumc.bmi.ird.spring.tutorial.util.ResourceProperties;
-import org.springframework.web.WebApplicationInitializer;
-import org.springframework.web.context.ContextLoaderListener;
-import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
-import org.springframework.web.servlet.DispatcherServlet;
+import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.filter.DelegatingFilterProxy;
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRegistration;
+import javax.servlet.Filter;
 import java.util.Properties;
 
 /**
- * Created by swang on 3/3/2015.
+ * Created by swang on 3/11/2015.
  */
-public class WebAppInitializer implements WebApplicationInitializer {
+public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     private static final PropertiesLoader propertiesLoader = new PropertiesLoader();
 
     @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
-        // Create the 'root' Spring application context
-        AnnotationConfigWebApplicationContext context = getContext();
-
-        // Manage the lifecycle of the root application context
-        servletContext.addListener(new ContextLoaderListener(context));
-
-        // Create the dispatcher servlet's Spring application context
-        AnnotationConfigWebApplicationContext dispatcherServlet = new
-                AnnotationConfigWebApplicationContext();
-        dispatcherServlet.register(MvcConfig.class);
-
-        // Register and map the dispatcher servlet
-        ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new
-                DispatcherServlet(dispatcherServlet));
-        dispatcher.setLoadOnStartup(1);
-        dispatcher.addMapping("/");
+    protected Class<?>[] getRootConfigClasses() {
+        return new Class<?>[]{AppConfig.class};
     }
 
-    /**
-     * Creates annotation driven context initializer. Active profile will be loaded from
-     * properties files.
-     *
-     * @return AnnotationConfigWebApplicationContext
-     */
-    private AnnotationConfigWebApplicationContext getContext() {
-        AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-        context.setConfigLocation("edu.osumc.bmi.ird.spring.tutorial.config");
-        //context.register(AppConfig.class, ServiceConfig.class);
-        Properties properties = propertiesLoader.load(ResourceProperties.SPRING_PROPERTIES_FILE);
-        context.getEnvironment().setActiveProfiles(
-                properties.getProperty("spring.profiles.active"));
+    @Override
+    protected Class<?>[] getServletConfigClasses() {
+        return new Class<?>[]{MvcConfig.class};
+    }
 
+    @Override
+    protected String[] getServletMappings() {
+
+        return new String[]{"/"};
+    }
+
+    @Override
+    protected Filter[] getServletFilters() {
+        return new Filter[]{
+                new DelegatingFilterProxy("springSecurityFilterChain"),
+                new OpenEntityManagerInViewFilter()};
+    }
+
+    @Override
+    protected WebApplicationContext createRootApplicationContext() {
+        WebApplicationContext context = super.createRootApplicationContext();
+        Properties properties = propertiesLoader.load(ResourceProperties.SPRING_PROPERTIES_FILE);
+        ((ConfigurableEnvironment) context.getEnvironment()).setActiveProfiles(
+                properties.getProperty("spring.profiles.active"));
         return context;
     }
 }

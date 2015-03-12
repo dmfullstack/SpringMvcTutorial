@@ -48,8 +48,8 @@ public class User implements Serializable {
     @Column(name = "id_picture")
     private String pictureId;
 
-    @Column(name = "login", nullable = false)
-    private String login;
+    @Column(name = "username", nullable = false)
+    private String username;
 
     @Column(name = "password", nullable = false)
     private String password;
@@ -61,10 +61,10 @@ public class User implements Serializable {
     private Boolean enabled;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "users_authorities", joinColumns = {@JoinColumn(name = "id_user",
+    @JoinTable(name = "users_roles", joinColumns = {@JoinColumn(name = "id_user",
             referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name =
-            "id_authority", table = "authority", referencedColumnName = "id")})
-    private Set<Authority> authorities = new HashSet<Authority>();
+            "id_role", table = "role", referencedColumnName = "id")})
+    private Set<Role> roles = new HashSet<Role>();
 
     public String getFirstName() {
         return firstName;
@@ -90,12 +90,12 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -114,12 +114,12 @@ public class User implements Serializable {
         this.birthDate = birthDate;
     }
 
-    public Set<Authority> getAuthorities() {
-        return authorities;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setAuthorities(Set<Authority> authorities) {
-        this.authorities = authorities;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     public Boolean getEnabled() {

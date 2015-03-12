@@ -1,7 +1,5 @@
 package edu.osumc.bmi.ird.spring.tutorial.test.config;
 
-import edu.osumc.bmi.ird.spring.tutorial.config.AppConfig;
-import edu.osumc.bmi.ird.spring.tutorial.config.MvcConfig;
 import edu.osumc.bmi.ird.spring.tutorial.config.PersistenceConfigDev;
 import edu.osumc.bmi.ird.spring.tutorial.config.ServiceConfig;
 import org.junit.Test;
@@ -25,7 +23,7 @@ import static org.junit.Assert.assertNotNull;
  * Created by swang on 3/3/2015.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {AppConfig.class, PersistenceConfigDev.class,
+@ContextConfiguration(classes = {/*AppConfig.class,*/PersistenceConfigDev.class,
         ServiceConfig.class})
 @ActiveProfiles(profiles = {"dev"})
 public class ApplicationContextTest {

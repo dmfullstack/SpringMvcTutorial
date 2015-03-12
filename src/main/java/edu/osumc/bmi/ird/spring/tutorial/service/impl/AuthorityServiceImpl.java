@@ -1,7 +1,7 @@
 package edu.osumc.bmi.ird.spring.tutorial.service.impl;
 
 import edu.osumc.bmi.ird.spring.tutorial.persistence.dao.AuthorityDao;
-import edu.osumc.bmi.ird.spring.tutorial.persistence.entity.Authority;
+import edu.osumc.bmi.ird.spring.tutorial.persistence.entity.Role;
 import edu.osumc.bmi.ird.spring.tutorial.service.AuthorityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * Authority Service.
+ * Role Service.
  * Created by swang on 3/4/2015.
  */
 @Transactional
@@ -21,17 +21,17 @@ public class AuthorityServiceImpl implements AuthorityService {
     private AuthorityDao authorityDao;
 
     @Override
-    public Authority get(Long id) {
+    public Role get(Long id) {
         return authorityDao.get(id);
     }
 
     @Override
-    public List<Authority> getAll() {
+    public List<Role> getAll() {
         return authorityDao.getAll();
     }
 
     @Override
-    public Authority save(Authority authority) {
+    public Role save(Role authority) {
         return authorityDao.create(authority);
     }
 }

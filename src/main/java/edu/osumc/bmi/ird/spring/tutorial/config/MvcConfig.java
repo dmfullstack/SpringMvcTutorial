@@ -8,8 +8,12 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import java.util.Properties;
 
 /**
  * Created by swang on 3/3/2015.
@@ -20,10 +24,16 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
     @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        super.addViewControllers(registry);
+        registry.addViewController("login/form").setViewName("login");
+        registry.addViewController("welcome").setViewName("welcome");
+        registry.addViewController("admin").setViewName("admin");
+    }
+
+    @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-        registry.addResourceHandler("/assets/**").
-                addResourceLocations("/WEB-INF/assets/");
     }
 
     @Override
@@ -51,5 +61,14 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         resource.setBasename("classpath:messages");
         resource.setDefaultEncoding("UTF-8");
         return resource;
+    }
+
+    @Bean
+    public SimpleMappingExceptionResolver simpleMappingExceptionResolver() {
+        SimpleMappingExceptionResolver b = new SimpleMappingExceptionResolver();
+        Properties mappings = new Properties();
+        mappings.put("org.springframework.dao.DataAccessException", "error");
+        b.setExceptionMappings(mappings);
+        return b;
     }
 }
